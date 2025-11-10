@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { AdShieldLogo, MoonIcon, SunIcon } from './Icons';
 
@@ -9,11 +8,11 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
     return (
-        <header className="bg-white/70 dark:bg-slate-900/70 backdrop-blur-md sticky top-0 z-10 border-b border-slate-200 dark:border-slate-800">
+        <header className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800">
             <div className="container mx-auto px-4">
                 <div className="flex justify-between items-center h-16">
                     <div className="flex items-center space-x-3">
-                        <AdShieldLogo className="h-8 w-8 text-blue-600" />
+                        <AdShieldLogo className="h-8 w-8 text-blue-600 dark:text-blue-500" />
                         <span className="text-xl font-semibold text-slate-800 dark:text-white">AdShield-CoreKit</span>
                     </div>
                     <button
