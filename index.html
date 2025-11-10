@@ -41,11 +41,16 @@
         font-family: 'JetBrains Mono', monospace;
       }
     </style>
-<script type="importmap">
+    <!-- 
+      This importmap tells the browser where to find the React modules.
+      The "react/jsx-runtime" is crucial for Babel's automatic JSX transform to work correctly.
+    -->
+    <script type="importmap">
 {
   "imports": {
     "react": "https://esm.sh/react@18.2.0",
     "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react/jsx-runtime": "https://esm.sh/react@18.2.0/jsx-runtime",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
     "react/": "https://aistudiocdn.com/react@^19.2.0/"
   }
