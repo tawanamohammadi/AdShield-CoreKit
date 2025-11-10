@@ -1,0 +1,31 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#1E293B" />
+    </linearGradient>
+    <style>
+      .title { font-family: 'Inter', sans-serif; font-size: 64px; font-weight: 700; fill: #F1F5F9; }
+      .subtitle { font-family: 'Inter', sans-serif; font-size: 32px; font-weight: 400; fill: #94A3B8; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg-gradient)" />
+
+  <g transform="translate(80, 250)">
+    <!-- Logo -->
+    <g transform="scale(3) translate(0, -10)">
+        <path d="M12 2.25c-5.133 0-9.633 3.063-11.49 7.425a.75.75 0 001.32.55C3.58 6.5 7.475 4.004 12 4.004c4.525 0 8.42 2.5 10.17 6.221a.75.75 0 001.32-.55C21.633 5.313 17.133 2.25 12 2.25z" fill="#2563EB"/>
+        <path fill-rule="evenodd" d="M12 2.25c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10zM12 4a8 8 0 100 16 8 8 0 000-16z" clip-rule="evenodd" fill="#2563EB" opacity=".2"/>
+        <path d="M16.303 8.247a.75.75 0 00-1.06-1.06L10.5 11.939 8.757 10.197a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.06 0l5.316-5.26z" fill="#F1F5F9"/>
+    </g>
+    
+    <!-- Text -->
+    <text x="120" y="0" class="title">AdShield CoreKit</text>
+    <text x="120" y="60" class="subtitle">DNS Ad-Blocking Benchmark</text>
+  </g>
+  
+  <text x="1120" y="590" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="20" fill="#475569">
+    Tawana Network / Tawana Proxy
+  </text>
+</svg>
