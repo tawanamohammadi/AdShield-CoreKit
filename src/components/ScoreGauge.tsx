@@ -1,56 +1,74 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 
 interface ScoreGaugeProps {
   score: number;
 }
 
 const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score }) => {
-  const [displayScore, setDisplayScore] = useState(0);
   const size = 200;
   const strokeWidth = 20;
   const center = size / 2;
   const radius = center - strokeWidth / 2;
-  const circumference = 2 * Math.PI * radius;
+  const circumference = useMemo(() => 2 * Math.PI * radius, [radius]);
+  const [displayScore, setDisplayScore] = useState(0);
+  const [dashOffset, setDashOffset] = useState(circumference);
+  const previousScoreRef = useRef(0);
 
-  const scoreOffset = ((100 - score) / 100) * circumference;
-  
+  const clampedScore = useMemo(() => {
+    if (Number.isNaN(score)) {
+      return 0;
+    }
+    return Math.min(100, Math.max(0, Math.round(score)));
+  }, [score]);
+
+  const scoreOffset = useMemo(
+    () => ((100 - clampedScore) / 100) * circumference,
+    [clampedScore, circumference],
+  );
+
   const scoreColor =
-    score > 85
+    clampedScore > 85
       ? 'text-green-500'
-      : score > 60
+      : clampedScore > 60
       ? 'text-yellow-500'
       : 'text-red-500';
 
   useEffect(() => {
     let animationFrameId: number;
-    const start = 0;
-    const end = score;
-    const duration = 1000;
+    const start = previousScoreRef.current;
+    const end = clampedScore;
+    const duration = 900;
     let startTime: number | null = null;
 
     const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
+      if (startTime === null) startTime = timestamp;
       const progress = timestamp - startTime;
       const percentage = Math.min(progress / duration, 1);
-      
-      const newScore = Math.floor(start + (end - start) * percentage);
+      const newScore = Math.round(start + (end - start) * percentage);
       setDisplayScore(newScore);
 
-      if (progress < duration) {
+      if (percentage < 1) {
         animationFrameId = requestAnimationFrame(animate);
-      } else {
-        setDisplayScore(end);
       }
     };
 
     animationFrameId = requestAnimationFrame(animate);
+    previousScoreRef.current = end;
 
     return () => cancelAnimationFrame(animationFrameId);
-  }, [score]);
+  }, [clampedScore]);
 
+  useEffect(() => {
+    setDashOffset(circumference);
+    const rafId = requestAnimationFrame(() => setDashOffset(scoreOffset));
+    return () => cancelAnimationFrame(rafId);
+  }, [circumference, scoreOffset]);
 
   return (
-    <div className="relative" style={{ width: size, height: size }}>
+    <div
+      className="relative drop-shadow-xl"
+      style={{ width: size, height: size }}
+    >
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
         {/* Background track */}
         <circle
@@ -64,7 +82,7 @@ const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score }) => {
         />
         {/* Foreground score arc */}
         <circle
-          className={`transform -rotate-90 origin-center transition-stroke-dashoffset duration-1000 ease-out ${scoreColor}`}
+          className={`transform -rotate-90 origin-center transition-[stroke-dashoffset] duration-1000 ease-out ${scoreColor}`}
           stroke="currentColor"
           strokeWidth={strokeWidth}
           strokeLinecap="round"
@@ -73,13 +91,7 @@ const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score }) => {
           cx={center}
           cy={center}
           strokeDasharray={circumference}
-          style={{ strokeDashoffset: circumference }} // start from 0
-          ref={circle => {
-              if (circle) {
-                  // Trigger transition on mount/update
-                  setTimeout(() => circle.style.strokeDashoffset = `${scoreOffset}`, 10);
-              }
-          }}
+          style={{ strokeDashoffset: dashOffset }}
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
