@@ -1,0 +1,5 @@
+{
+  "name": "AdShield CoreKit Benchmark",
+  "description": "A client-side benchmark UI to test the effectiveness of DNS-level ad blocking. It measures how many ad and tracker domains are successfully blocked by your network configuration.",
+  "requestFramePermissions": []
+}
