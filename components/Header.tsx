@@ -1,5 +1,5 @@
 import React from 'react';
-import { AdShieldLogo, MoonIcon, SunIcon } from './Icons';
+import { AdShieldLogo, MoonIcon, SunIcon } from './Icons.tsx';
 
 interface HeaderProps {
     theme: 'light' | 'dark';

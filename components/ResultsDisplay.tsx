@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { BenchmarkResult, TestCategory } from '../types';
-import ScoreGauge from './ScoreGauge';
-import { downloadJson, copyMarkdownToClipboard } from '../utils/fileUtils';
-import { DownloadIcon, CopyIcon, CheckCircleIcon, XCircleIcon, Bars3BottomLeftIcon } from './Icons';
-import { CATEGORIES } from '../constants';
+import { BenchmarkResult, TestCategory } from '../types.ts';
+import ScoreGauge from './ScoreGauge.tsx';
+import { downloadJson, copyMarkdownToClipboard } from '../utils/fileUtils.ts';
+import { DownloadIcon, CopyIcon, CheckCircleIcon, XCircleIcon, Bars3BottomLeftIcon } from './Icons.tsx';
+import { CATEGORIES } from '../constants.ts';
 
 interface ResultsDisplayProps {
   results: BenchmarkResult;

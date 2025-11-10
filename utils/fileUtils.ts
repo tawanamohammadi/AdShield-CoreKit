@@ -1,5 +1,4 @@
-
-import { BenchmarkResult } from '../types';
+import { BenchmarkResult } from '../types.ts';
 
 export const downloadJson = (data: BenchmarkResult, filename: string) => {
   const jsonStr = JSON.stringify(data, null, 2);

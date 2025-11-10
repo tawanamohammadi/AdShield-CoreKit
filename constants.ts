@@ -1,4 +1,4 @@
-import { TestEndpoint, TestCategory } from './types';
+import { TestEndpoint, TestCategory } from './types.ts';
 
 export const CATEGORIES: TestCategory[] = [
     'Google',

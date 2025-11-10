@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import BenchmarkController from './components/BenchmarkController';
-import ComparisonCard from './components/ComparisonCard';
+import Header from './components/Header.tsx';
+import Footer from './components/Footer.tsx';
+import BenchmarkController from './components/BenchmarkController.tsx';
+import ComparisonCard from './components/ComparisonCard.tsx';
 
 const App: React.FC = () => {
     const [theme, setTheme] = useState<'light' | 'dark'>(() => {

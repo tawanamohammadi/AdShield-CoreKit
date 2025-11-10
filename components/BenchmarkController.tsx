@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import { TestRunStatus, BenchmarkResult, ResultBreakdown } from '../types';
-import { runBenchmark } from '../services/benchmarkService';
-import ResultsDisplay from './ResultsDisplay';
-import { TEST_ENDPOINTS } from '../constants';
+import { TestRunStatus, BenchmarkResult, ResultBreakdown } from '../types.ts';
+import { runBenchmark } from '../services/benchmarkService.ts';
+import ResultsDisplay from './ResultsDisplay.tsx';
+import { TEST_ENDPOINTS } from '../constants.ts';
 
 const BenchmarkController: React.FC = () => {
     const [status, setStatus] = useState<TestRunStatus>('idle');

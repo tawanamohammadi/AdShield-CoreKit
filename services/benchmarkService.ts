@@ -1,6 +1,5 @@
-
-import { TEST_ENDPOINTS } from '../constants';
-import { BenchmarkResult, ResultBreakdown, TestEndpoint, TestResultStatus } from '../types';
+import { TEST_ENDPOINTS } from '../constants.ts';
+import { BenchmarkResult, ResultBreakdown, TestEndpoint, TestResultStatus } from '../types.ts';
 
 const TEST_TIMEOUT = 2500; // 2.5 seconds timeout for each request
 
