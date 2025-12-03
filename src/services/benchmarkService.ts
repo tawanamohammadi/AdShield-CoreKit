@@ -1,81 +1,59 @@
-import { TEST_ENDPOINTS } from '../constants';
-import { BenchmarkResult, ResultBreakdown, TestEndpoint, TestResultStatus } from '../types';
+import { collectResources } from './networkCollector';
+import { loadLists, matchUrl } from './filterEngine';
+import { scanDom } from './domScanner';
+import { BenchmarkResult } from '../utils/types';
+import { clampScore, normalizeUrl } from '../utils/format';
 
-const TEST_TIMEOUT = 2500; // 2.5 seconds timeout for each request
+export const benchmarkPage = async (url: string): Promise<BenchmarkResult> => {
+  const normalizedUrl = normalizeUrl(url);
+  const notes: string[] = [];
 
-/**
- * Tests a single endpoint to see if it's blocked.
- * A request is considered 'blocked' if it fails to complete due to a network error,
- * DNS resolution failure, or timeout.
- * @param endpoint The endpoint to test.
- * @returns A promise that resolves to a ResultBreakdown.
- */
-async function testEndpoint(endpoint: TestEndpoint): Promise<ResultBreakdown> {
-    const domain = new URL(endpoint.url).hostname;
-    let status: TestResultStatus = 'pending';
+  await loadLists();
 
-    try {
-        // We use an AbortController for a reliable timeout.
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), TEST_TIMEOUT);
+  const resources = await collectResources(normalizedUrl);
+  const matchedRequests = resources.filter((resource) => matchUrl(resource));
 
-        await fetch(endpoint.url, {
-            method: 'GET',
-            mode: 'no-cors', // Important: Prevents actual content download and bypasses some CORS issues.
-            cache: 'no-store', // Ensures a fresh request every time.
-            signal: controller.signal,
-        });
+  let docReport = { adElements: 0, details: [] as Array<{ selector: string; reason: string }> };
 
-        // If fetch succeeds, it means the request was not blocked at the DNS level.
-        // Even with `no-cors`, a successful opaque response means the domain is accessible.
-        status = 'loaded';
-        clearTimeout(timeoutId);
-
-    } catch (error) {
-        // Any error (network, abort/timeout, DNS resolution failure) is treated as 'blocked'.
-        status = 'blocked';
+  try {
+    const res = await fetch(normalizedUrl, { mode: 'cors' });
+    if (res.ok) {
+      const html = await res.text();
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      docReport = scanDom(doc);
+    } else {
+      notes.push('Unable to fetch DOM snapshot (CORS)');
     }
+  } catch (error) {
+    console.warn('DOM fetch error', error);
+    notes.push('DOM snapshot blocked by CORS; DOM heuristics are limited.');
+  }
 
-    return {
-        domain,
-        category: endpoint.category,
-        status,
-    };
-}
+  const resourcesTotal = resources.length;
+  const adRequestsDetected = matchedRequests.length;
+  const domAdsDetected = docReport.adElements;
 
-/**
- * Runs the full benchmark across all defined endpoints.
- * @param onProgress A callback function to report progress after each test.
- * @returns A promise that resolves to the final BenchmarkResult.
- */
-export async function runBenchmark(
-    onProgress: (result: ResultBreakdown) => void
-): Promise<BenchmarkResult> {
-    const breakdown: ResultBreakdown[] = [];
-    let weightedBlocked = 0;
-    let totalWeight = 0;
+  const ARD = clampScore((adRequestsDetected / Math.max(resourcesTotal, 1)) * 100);
+  const ADE = clampScore(Math.min(100, domAdsDetected * 12));
+  const BPS = clampScore(ARD * 0.6 + ADE * 0.4);
 
-    for (const endpoint of TEST_ENDPOINTS) {
-        const result = await testEndpoint(endpoint);
-        breakdown.push(result);
-        onProgress(result);
+  const samples = {
+    matchedRequests: matchedRequests.slice(0, 50),
+    domElements: docReport.details.slice(0, 50),
+  };
 
-        totalWeight += endpoint.weight;
-        if (result.status === 'blocked') {
-            weightedBlocked += endpoint.weight;
-        }
-    }
+  if (resourcesTotal === 0) {
+    notes.push('No resources were detected. The site may block embedding or require user interaction.');
+  }
 
-    const blockedCount = breakdown.filter(r => r.status === 'blocked').length;
-    const loadedCount = breakdown.length - blockedCount;
-    const score = totalWeight > 0 ? Math.round((weightedBlocked / totalWeight) * 100) : 0;
-
-    return {
-        score,
-        blocked: blockedCount,
-        loaded: loadedCount,
-        total: breakdown.length,
-        timestamp: new Date().toISOString(),
-        breakdown,
-    };
-}
+  return {
+    url: normalizedUrl,
+    timestamp: Date.now(),
+    resourcesTotal,
+    adRequestsDetected,
+    domAdsDetected,
+    scores: { ARD, ADE, BPS },
+    samples,
+    notes,
+  };
+};

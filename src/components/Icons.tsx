@@ -1,54 +1,54 @@
-import React from 'react';
-
-export const AdShieldLogo: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
-    <path fillRule="evenodd" d="M12.016 2.25A19.52 19.52 0 003.32 5.093 19.52 19.52 0 002.25 12c0 5.143 1.903 9.8 4.984 13.25a.75.75 0 00.998-1.124A18.002 18.002 0 013.75 12c0-4.237 1.403-8.163 3.7-11.163a.75.75 0 00-.434-1.587z" clipRule="evenodd" />
-    <path d="M11.25 2.25c.816 0 1.62.13 2.384.382a.75.75 0 01-.434 1.413A18.001 18.001 0 0012.016 3.75a18.001 18.001 0 00-7.05 13.532.75.75 0 01-1.38-.585A19.501 19.501 0 0111.25 2.25z" />
-    <path fillRule="evenodd" d="M21.75 12c0-5.143-1.903-9.8-4.984-13.25a.75.75 0 00-.998 1.124A18.002 18.002 0 0120.25 12c0 4.237-1.403 8.163-3.7 11.163a.75.75 0 00.434 1.587A19.52 19.52 0 0020.68 18.907 19.52 19.52 0 0021.75 12z" clipRule="evenodd" />
-    <path d="M12.75 21.75a19.501 19.501 0 01-8.636-2.072.75.75 0 01.585-1.38 18.001 18.001 0 0015.102 0 .75.75 0 01.585 1.38A19.501 19.501 0 0112.75 21.75z" />
-    <path d="M16.06 8.94a.75.75 0 10-1.06-1.06L8.94 14.94a.75.75 0 001.06 1.06l6.06-6.06z" />
+export const ActivityIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+    <path d="M3 12h4l2 7 4-14 2 7h4" />
   </svg>
 );
 
-
-export const SunIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-    </svg>
-);
-
-export const MoonIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
-    </svg>
-);
-
-export const DownloadIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+export const TargetIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+    <circle cx="12" cy="12" r="7" />
+    <circle cx="12" cy="12" r="3" />
+    <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
   </svg>
 );
 
-export const CopyIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
+export const WifiIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+    <path d="M5 12a9 9 0 0 1 14 0" />
+    <path d="M8.5 15.5a5 5 0 0 1 7 0" />
+    <circle cx="12" cy="19" r="1" />
   </svg>
 );
 
-export const CheckCircleIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+export const MoonIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
   </svg>
 );
 
-export const XCircleIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+export const SunIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.36-7.36-1.42 1.42M6.06 17.94l-1.42 1.42m0-13.72 1.42 1.42m11.32 11.32 1.42 1.42" />
   </svg>
 );
 
-export const Bars3BottomLeftIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
+export const LoaderIcon = () => (
+  <svg className="animate-spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+  </svg>
+);
+
+export const ShieldIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+    <path d="M12 3 4 6v6c0 5 3.5 7.5 8 9 4.5-1.5 8-4 8-9V6l-8-3Z" />
+    <path d="m9 12 2 2 4-4" />
+  </svg>
+);
+
+export const PinIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+    <path d="M12 21s6-4.35 6-10a6 6 0 0 0-12 0c0 5.65 6 10 6 10Z" />
+    <circle cx="12" cy="11" r="2" />
   </svg>
 );
