@@ -2,8 +2,13 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [work]
   workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
   build-and-deploy:
@@ -20,9 +25,13 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: ./dist
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
