@@ -6,7 +6,7 @@
   "homepage": "https://tawanamohammadi.github.io/AdShield-CoreKit",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && touch dist/.nojekyll",
+    "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "predeploy": "npm run build",
